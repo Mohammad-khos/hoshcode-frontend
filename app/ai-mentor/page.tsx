@@ -1,27 +1,74 @@
 // src/app/ai-mentor/page.tsx
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { ChatSidebar } from "@/features/ai-mentor/components/ChatSidebar";
 import { ChatWindow } from "@/features/ai-mentor/components/ChatWindow";
-import { ContextPanel } from "@/features/ai-mentor/components/ContextPanel";
 
 export default function AIMentorPage() {
+  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
+  // کلید برای ریست کردن کامپوننت چت
+  const [chatSessionId, setChatSessionId] = useState(0);
+
+  const handleNewChat = () => {
+    setChatSessionId(prev => prev + 1);
+    setIsMobileSidebarOpen(false); // بستن منو در موبایل
+  };
+
   return (
-    // ارتفاع صفحه را ثابت می‌کنیم (h-screen) تا اسکرول داخلی کار کند
-    <div className="flex h-screen w-full overflow-hidden bg-background">
+    <div className="flex h-[100dvh] w-full overflow-hidden bg-white md:bg-gray-50/50 p-0 md:p-4 gap-0 md:gap-6 font-dana relative" dir="rtl">
       
-      {/* 1. Sidebar (Left) */}
-      <ChatSidebar />
+      {/* Mobile Sidebar */}
+      <div 
+        className={`
+          fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-opacity duration-300 md:hidden
+          ${isMobileSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}
+        `}
+        onClick={() => setIsMobileSidebarOpen(false)}
+      >
+        <aside 
+          className={`
+            absolute top-0 right-0 h-full w-80 bg-white shadow-2xl transition-transform duration-300 ease-out
+            ${isMobileSidebarOpen ? "translate-x-0" : "translate-x-full"}
+          `}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* پاس دادن تابع handleNewChat */}
+          <ChatSidebar 
+            isOpen={true} 
+            setIsOpen={() => setIsMobileSidebarOpen(false)} 
+            onNewChat={handleNewChat}
+          />
+        </aside>
+      </div>
+
+      {/* Desktop Sidebar */}
+      <aside 
+        className={`
+          hidden md:flex flex-col bg-white rounded-[1.5rem] border border-gray-200 shadow-sm overflow-hidden 
+          transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] relative z-20
+          ${isDesktopSidebarOpen ? "w-80" : "w-20"}
+        `}
+      >
+        <ChatSidebar 
+          isOpen={isDesktopSidebarOpen} 
+          setIsOpen={setIsDesktopSidebarOpen} 
+          onNewChat={handleNewChat}
+        />
+      </aside>
       
-      {/* 2. Main Chat (Center) */}
-      <ChatWindow />
-      
-      {/* 3. Context Panel (Right - in RTL it will be visually Left if logic is not mirrored, but flex order handles it) */}
-      {/* نکته: در حالت RTL، اگر بخواهید سایدبار "راست" (Context) در سمت چپ صفحه بیفتد (مثل طرح انگلیسی که سمت راست بود)، ترتیب فلکس درست است. */}
-      {/* اما اگر می‌خواهید در RTL، پنل Context سمت "چپ" باشد (که منطقی است)، باید در کد JSX اول بیاید یا از order استفاده کنید. */}
-      {/* در اینجا ما ترتیب استاندارد DOM را حفظ می‌کنیم. در RTL خود به خود جاها برعکس می‌شود. */}
-      {/* ChatSidebar (راست در RTL) | ChatWindow (وسط) | ContextPanel (چپ در RTL) */}
-      <ContextPanel />
-      
+      {/* Main Chat Area */}
+      <main className="flex-1 flex flex-col md:rounded-[2rem] bg-white md:bg-gray-50 relative z-10 overflow-hidden shadow-none md:shadow-xl md:shadow-gray-200/40">
+        {/* کلید باعث می‌شود با هر بار چت جدید، کامپوننت دوباره ساخته شود و به حالت خوش‌آمدگویی برود */}
+        <ChatWindow 
+          key={chatSessionId} 
+          isSidebarOpen={isDesktopSidebarOpen} 
+          onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)}
+        />
+      </main>
+
     </div>
   );
 }

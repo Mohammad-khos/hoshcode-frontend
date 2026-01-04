@@ -78,7 +78,7 @@ export default function AIHubPage() {
                   {/* CTA Button */}
                   <div className="mb-12">
                     <Link
-                      href="/ai-mentor/code"
+                      href="/ai-mentor"
                       className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl  hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-xl shadow-gray-900/10"
                     >
                       <span>شروع کدنویسی</span>
