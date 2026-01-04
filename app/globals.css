@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ========================================
+   TAILWIND V4 THEME: FINCA HYBRID (BLUE & GREEN)
+   ========================================
+*/
+@theme {
+  /* --- Typography --- */
+  --font-dana: var(--font-dana), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- 1. PRIMITIVE COLORS --- */
+
+  /* A. BRAND COLOR: Finca Indigo (آبی/بنفش)
+     این رنگ اصلی هویت سایت است (لوگو، هدر، دکمه‌های ثانویه).
+     دقیقاً همان آبی جذابی که در لوگوی فینکا می‌بینید.
+  */
+  
+  --color-brand-50:  #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #796add; /* آبی روشن و زنده */
+  --color-brand-600: #9685F8; /* آبی اصلی (Primary Blue) */
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b; /* سرمه‌ای خیلی تیره برای فوتر */
+
+  /* B. ACTION COLOR: Growth Emerald (سبز زمردی)
+     این رنگ برای دکمه‌های "شروع کنید"، قیمت‌ها و پیام‌های موفقیت است.
+     این سبز در کنار آن آبی، کنتراست فوق‌العاده‌ای می‌سازد.
+  */
+  --color-action-50:  #ecfdf5;
+  --color-action-100: #d1fae5;
+  --color-action-200: #a7f3d0;
+  --color-action-300: #6ee7b7;
+  --color-action-400: #34d399;
+  --color-action-500: #10b981; /* سبز اصلی دکمه‌ها (خیلی فرش) */
+  --color-action-600: #059669; /* سبز هاور */
+  --color-action-700: #047857;
+  --color-action-800: #065f46;
+  --color-action-900: #064e3b;
+  --color-action-950: #022c22;
+
+  /* C. HIGHLIGHT: Trust Gold (زرد/نارنجی)
+     برای ستاره‌ها، موج‌های بک‌گراند و بخش‌های "ویژه".
+  */
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+
+  /* Neutrals: Clean Slate
+     خاکستری‌های تمیز و کمی سرد برای مدرن نگه داشتن فضا.
+  */
+  --color-gray-50:  #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b; /* رنگ متن تیترها */
+  --color-gray-900: #0f172a;
+  --color-gray-950: #020617;
+
+  /* --- 2. SEMANTIC MAPPING --- */
+  
+  --color-background: #ffffff;
+  --color-foreground: var(--color-gray-800);
+
+  /* Primary (Identity) -> Blue */
+  --color-primary: var(--color-brand-600);
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover: var(--color-brand-700);
+
+  /* Success/CTA (Growth) -> Green */
+  /* نکته مهم: برای دکمه‌های اصلی فروش از کلاس bg-success یا bg-action-500 استفاده کن */
+  --color-success: var(--color-action-500);
+  --color-success-foreground: #ffffff;
+  
+  --color-border: var(--color-gray-200);
+  --color-input: var(--color-gray-200);
+  
+  /* حلقه دور اینپوت‌ها آبی می‌شود (حس تکنولوژی) */
+  --color-ring: var(--color-brand-500);
+
+  /* --- Radiuses --- */
+  /* گوشه‌های نرم و مدرن */
+  --radius-lg: 1rem;    /* 16px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-sm: 0.5rem;  /* 8px */
+}
+
+/* ========================================
+   BASE STYLES
+   ========================================
+*/
+@layer base {
+  body {
+    background-color: var(--color-gray-50);
+    color: var(--color-foreground);
+    font-family: var(--font-dana);
+    font-feature-settings: "ss01", "ss02"; 
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-gray-900);
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+}
+
+/* ========================================
+   UTILITIES (THE FINCA MAGIC)
+   ========================================
+*/
+@layer utilities {
+  .container-custom {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* 1. گرادینت مخصوص فینکا (ترکیب آبی و سبز)
+     از این برای بنرها یا کارت‌های ویژه استفاده کن.
+  */
+  .bg-gradient-dual {
+    @apply bg-linear-to-r from-brand-600 to-action-500;
+  }
+
+  /* 2. گرادینت متن (بسیار جذاب برای تیترهای بزرگ) */
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-brand-600 via-brand-500 to-action-500;
+  }
+
+  /* 3. دکمه اصلی (CTA) - سبزِ رشد
+     این دکمه باید در صفحه بدرخشد.
+  */
+  .btn-cta {
+    @apply bg-action-500 text-white shadow-lg hover:bg-action-600 hover:-translate-y-0.5 transition-all duration-200 shadow-action-500/30;
+  }
+
+  /* 4. دکمه ثانویه - آبی برند
+     برای دکمه‌هایی مثل "ورود" یا "اطلاعات بیشتر"
+  */
+  .btn-brand {
+    @apply bg-brand-50; /* پس‌زمینه خیلی روشن */
+    color: var(--color-brand-700);
+    font-weight: 600;
+  }
+  .btn-brand:hover {
+    @apply bg-brand-100;
+  }
+
+  /* 5. سایه رنگی آبی (برای کارت‌ها) */
+  .shadow-indigo {
+    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.15);
+  }
+  
+  /* 6. شکل‌های موج‌دار زرد (برای بک‌گراند)
+     کلاس کمکی برای استفاده از رنگ زرد
+  */
+  .bg-decoration-yellow {
+    background-color: var(--color-gold-400);
+  }
+}
