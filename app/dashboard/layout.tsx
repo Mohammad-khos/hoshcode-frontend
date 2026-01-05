@@ -2,6 +2,7 @@
 import React from "react";
 import DashboardHeader from "@/features/dashboard/components/DashboardHeader";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function DashboardLayout({
   children,
@@ -10,10 +11,11 @@ export default function DashboardLayout({
 }) {
   return (
     // ساختار جدید: هدر در بالا، بدنه در پایین
-    <div className="flex h-screen w-full flex-col overflow-hidden bg-background">
+  <>
+      <Header />
+    <div className="flex h-screen w-full flex-col overflow-hidden  my-22">
       
       {/* هدر سراسری (Top Navigation) */}
-      <Header />
       
       <div className="flex flex-1 overflow-hidden">
         {/* سایدبار (Side Navigation) */}
@@ -28,5 +30,7 @@ export default function DashboardLayout({
       </div>
       
     </div>
+    <Footer/>
+    </>
   );
 }

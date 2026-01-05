@@ -84,7 +84,7 @@ const Header = () => {
               <Button
                 variant="primary"
                 size="md"
-                className="font-bold text-white hover:bg-gray-100/80 rounded-xl"
+                className="font-bold text-white  rounded-xl"
               >
                 ورود
               </Button>

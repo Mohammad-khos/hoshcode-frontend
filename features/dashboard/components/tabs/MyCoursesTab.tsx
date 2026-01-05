@@ -1,53 +1,128 @@
 // src/features/dashboard/components/tabs/MyCoursesTab.tsx
-import React from "react";
-import { Play, Clock, CheckCircle2 } from "lucide-react";
+import React, { useState } from "react";
+import { Search, Plus } from "lucide-react";
+import { cn } from "@/lib/utils";
+// ایمپورت کردن کامپوننت اصلی کارت دوره
+import { CourseCard } from "@/features/courses/components/CourseCard";
+
+// Minimal Filter Tab Component
+const FilterTab = ({ label, active, onClick }: any) => (
+    <button 
+        onClick={onClick}
+        className={cn(
+            "relative px-4 py-2 text-xs font-bold transition-all duration-300 rounded-full",
+            active ? "text-gray-900 bg-white shadow-sm" : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
+        )}
+    >
+        {label}
+    </button>
+);
 
 export const MyCoursesTab = () => {
+  const [filter, setFilter] = useState("all");
+
+  // داده‌های ماک متناسب با CourseCard اصلی
+  // نکته: چون کامپوننت CourseCard از Image استفاده می‌کند، حتما باید src عکس معتبر باشد.
+  // من از تصاویر placeholder استفاده کردم تا ارور نگیرید.
   const courses = [
-    { title: "الگوهای پیشرفته React", module: "ماژول ۴", progress: 65, status: "active", image: "bg-indigo-500/20", color: "text-indigo-500" },
-    { title: "پایتون برای علم داده", module: "ماژول ۲", progress: 30, status: "active", image: "bg-yellow-500/20", color: "text-yellow-500" },
-    { title: "مبانی UI/UX", module: "تکمیل شده", progress: 100, status: "completed", image: "bg-pink-500/20", color: "text-pink-500" },
+    {
+      id: 1,
+      title: "توسعه حرفه‌ای با Next.js 14 و React پیشرفته",
+      rating: 4.8,
+      reviews: 124,
+      levelLabel: "پیشرفته",
+      image: "https://placehold.co/600x400/2563eb/ffffff?text=Next.js+14", // لینک موقت برای جلوگیری از کرش
+      chapters: 24,
+      readingTime: "۱۲ ساعت",
+      status: "active"
+    },
+    {
+      id: 2,
+      title: "متخصص پایتون: از صفر تا تحلیل داده",
+      rating: 4.9,
+      reviews: 85,
+      levelLabel: "متوسط",
+      image: "https://placehold.co/600x400/ca8a04/ffffff?text=Python+Mastery",
+      chapters: 18,
+      readingTime: "۱۸ ساعت",
+      status: "active"
+    },
+    {
+      id: 3,
+      title: "امنیت وب و جلوگیری از نفوذ (Web Security)",
+      rating: 4.7,
+      reviews: 42,
+      levelLabel: "متوسط",
+      image: "https://placehold.co/600x400/e11d48/ffffff?text=Security",
+      chapters: 12,
+      readingTime: "۶ ساعت",
+      status: "active"
+    },
+    {
+      id: 4,
+      title: "جامع‌ترین دوره HTML & CSS مدرن",
+      rating: 5.0,
+      reviews: 210,
+      levelLabel: "مقدماتی",
+      image: "https://placehold.co/600x400/0ea5e9/ffffff?text=HTML+CSS",
+      chapters: 30,
+      readingTime: "۱۰ ساعت",
+      status: "completed"
+    }
   ];
 
+  const filteredCourses = courses.filter(c => 
+    filter === "all" ? true : c.status === filter
+  );
+
   return (
-    <div className="space-y-6 animate-fade-in">
-        <div className="flex gap-4 overflow-x-auto pb-2">
-            <button className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-bold shadow-sm">در حال یادگیری</button>
-            <button className="px-4 py-2 rounded-full bg-card border border-border text-muted-foreground text-sm font-medium hover:bg-muted">تکمیل شده</button>
-            <button className="px-4 py-2 rounded-full bg-card border border-border text-muted-foreground text-sm font-medium hover:bg-muted">نشان‌شده‌ها</button>
+    <div className="space-y-8 font-dana animate-in fade-in slide-in-from-bottom-4 duration-500 min-h-[500px]">
+      
+      {/* --- Header & Filters --- */}
+      <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between gap-6">
+        <div>
+            <h2 className="text-xl font-black text-gray-900">دوره‌های من</h2>
+            <p className="text-xs text-gray-400 font-medium mt-1">مدیریت مسیرهای یادگیری شما</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {courses.map((course, idx) => (
-                <div key={idx} className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/40 hover:shadow-md">
-                    <div className="flex items-start justify-between">
-                         <div className={`h-12 w-12 rounded-lg ${course.image} flex items-center justify-center ${course.color}`}>
-                             {course.status === 'completed' ? <CheckCircle2 className="w-6 h-6" /> : <Play className="w-6 h-6 fill-current" />}
-                         </div>
-                         <span className="text-xs font-medium bg-muted px-2 py-1 rounded text-muted-foreground">{course.status === 'active' ? 'در حال پخش' : 'تکمیل شده'}</span>
-                    </div>
-                    
-                    <div>
-                        <h4 className="font-bold text-foreground text-lg">{course.title}</h4>
-                        <p className="text-sm text-muted-foreground mt-1">{course.module}</p>
-                    </div>
-
-                    <div className="mt-2">
-                        <div className="flex justify-between text-xs mb-1.5 font-medium">
-                            <span className="text-muted-foreground">پیشرفت دوره</span>
-                            <span className="text-primary">{course.progress}٪</span>
-                        </div>
-                        <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                            <div className="h-full bg-primary rounded-full transition-all duration-1000" style={{ width: `${course.progress}%` }}></div>
-                        </div>
-                    </div>
-                    
-                    <button className="mt-2 w-full py-2 rounded-lg border border-border text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-colors">
-                        {course.status === 'completed' ? 'مشاهده گواهی' : 'ادامه یادگیری'}
-                    </button>
-                </div>
-            ))}
+        <div className="flex items-center gap-1 bg-gray-100/50 p-1 rounded-full">
+            <FilterTab label="همه" active={filter === "all"} onClick={() => setFilter("all")} />
+            <FilterTab label="در حال یادگیری" active={filter === "active"} onClick={() => setFilter("active")} />
+            <FilterTab label="تکمیل شده" active={filter === "completed"} onClick={() => setFilter("completed")} />
         </div>
+      </div>
+
+      {/* --- Course Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        {/* Render EXISTING CourseCard */}
+        {filteredCourses.map((course) => (
+            // تمام پراپ‌های مورد نیاز CourseCard را پاس می‌دهیم
+            <CourseCard 
+                key={course.id}
+                id={course.id}
+                title={course.title}
+                image={course.image}
+                rating={course.rating}
+                reviews={course.reviews}
+                levelLabel={course.levelLabel}
+                chapters={course.chapters}
+                readingTime={course.readingTime}
+            />
+        ))}
+        
+        {/* Add New Ghost Card (همان استایل قبلی برای دکمه افزودن) */}
+        <button className="group flex flex-col items-center justify-center gap-4 bg-gray-50/50 border-2 border-dashed border-gray-200 rounded-[2rem] p-3 h-full min-h-[320px] hover:bg-gray-50 hover:border-gray-300 transition-all duration-300">
+            <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-300 group-hover:text-primary group-hover:scale-110 transition-all">
+                <Plus size={24} />
+            </div>
+            <div className="text-center">
+                <span className="block font-bold text-sm text-gray-900 mb-1">دوره جدید</span>
+                <span className="text-xs text-gray-400">جستجو در کاتالوگ</span>
+            </div>
+        </button>
+
+      </div>
     </div>
   );
 };
