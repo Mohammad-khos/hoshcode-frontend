@@ -25,7 +25,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             /* 1. CTA (Call to Action) -> سبز رشد (Growth Emerald)
                مهم‌ترین دکمه صفحه. سایه سبز دارد و در هاور کمی بالا می‌پرد.
             */
-            "bg-action-600 text-white shadow-lg shadow-action-500/25 hover:bg-action-500 hover:-translate-y-0.5 hover:shadow-action-500/40": 
+            "bg-action-600 text-white shadow-lg shadow-action-500/25 hover:bg-action-700 ": 
               variant === "cta",
 
             /* 2. Primary -> آبی برند (Finca Indigo)

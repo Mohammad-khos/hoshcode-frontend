@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ArrowLeft } from "lucide-react";
+import Button from "@/components/ui/Button";
 
 export default function AboutPage() {
   return (
@@ -88,15 +89,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* CTA Button */}
-              <div className="pt-6">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary/20 hover:bg-primary/90 hover:-translate-y-1 transition-all duration-300"
-                >
-                  <span>تماس با ما  </span>
-                </Link>
-              </div>
+           
             </div>
 
             {/* Left Column: Abstract Graphic (5 Cols) */}

@@ -32,6 +32,7 @@ const Header = () => {
   const navItems = [
     { name: "دوره‌های آموزشی", href: "/courses" },
     { name: "دستیار هوشمند", href: "/ai-hub" },
+    { name: "محیط یادگیری ", href: "/learning" },
     { name: "درباره ما", href: "/about" },
     { name: "تماس با ما", href: "/contact" },
   ];
@@ -40,7 +41,7 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] font-dana",
+          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out font-dana",
           // در حالت اسکرول یا باز بودن منو، هدر سفید و بلور می‌شود
           scrolled || isMobileMenuOpen
             ? "bg-white/80 backdrop-blur-xl border-b border-gray-200/50 py-3 shadow-sm"
