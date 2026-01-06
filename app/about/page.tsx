@@ -1,114 +1,241 @@
 // src/app/about/page.tsx
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Users, Target, Zap, Award } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-display">
+    <>
       <Header />
-      
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        {/* گرادینت پس‌زمینه هماهنگ با تم */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
-        <div className="container-custom relative z-10 text-center">
-          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
-            داستان ما
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight text-foreground">
-            ما در حال ساختن <br />
-            <span className="text-primary">آینده آموزش</span> هستیم
-          </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            هوش کد با هدف دموکراتیک کردن آموزش برنامه‌نویسی و توانمندسازی افراد برای ساختن آینده‌ای دیجیتال متولد شد. ما باور داریم یادگیری باید تعاملی، در دسترس و لذت‌بخش باشد.
-          </p>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-card border-y border-border">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { label: "دانشجوی فعال", value: "+۵۰ هزار" },
-              { label: "دوره آموزشی", value: "+۲۰۰" },
-              { label: "مدرس خبره", value: "+۴۰" },
-              { label: "ساعت آموزش", value: "+۱۰ هزار" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl md:text-4xl font-black text-foreground mb-2">{stat.value}</div>
-                <div className="text-primary text-sm font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Values */}
-      <section className="py-20 md:py-32">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary rounded-3xl rotate-6 opacity-20 blur-xl"></div>
-              {/* تصویر آنلاین */}
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop" 
-                alt="تیم هوش کد" 
-                className="relative rounded-3xl border border-border shadow-2xl grayscale hover:grayscale-0 transition-all duration-500"
+      <div className="min-h-screen text-gray-900 font-dana my-22 overflow-x-hidden">
+        <main className="container-custom mx-auto px-6 py-12 md:py-24 max-w-7xl">
+          {/* --- Section 1: Top Area (Image Right, Text Left) --- */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16items-center mb-24">
+            {/* Image Box */}
+            <div className="relative w-full aspect-square lg:aspect-[4/3] bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm order-1">
+              <Image
+                src="/avatar.png" // مطمئن شوید عکس وجود دارد
+                alt="درباره هوش‌کد"
+                fill
+                className="object-cover"
+                priority
               />
             </div>
-            <div className="space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">ماموریت ما توانمندسازی شماست</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                ما تیمی از توسعه‌دهندگان، طراحان و مدرسان عاشق تکنولوژی هستیم که دور هم جمع شده‌ایم تا شکاف بین آموزش دانشگاهی و نیاز بازار کار را پر کنیم.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {[
-                  { icon: Target, title: "یادگیری هدفمند", desc: "مسیرهای مشخص برای رسیدن به شغل" },
-                  { icon: Users, title: "جامعه پویا", desc: "یادگیری در کنار هزاران دانشجوی دیگر" },
-                  { icon: Zap, title: "سرعت و کیفیت", desc: "جدیدترین تکنولوژی‌ها با بالاترین کیفیت" },
-                  { icon: Award, title: "گواهینامه معتبر", desc: "مدرک قابل ارائه به شرکت‌های معتبر" },
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center text-primary shadow-sm">
-                      <item.icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-lg text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  </div>
-                ))}
+
+            {/* Intro Text */}
+            <div className="order-2 space-y-8">
+              <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight tracking-tight">
+                ما <span className="text-primary">پلی میان دانشگاه</span> <br />
+                و صنعت هستیم.
+              </h1>
+              <div className="space-y-6 text-md text-gray-500 font-medium leading-loose text-justify">
+                <p>
+                  هوش‌کد فراتر از یک پلتفرم آموزشی ساده است؛ ما یک اکوسیستم پویا
+                  برای پرورش نسل بعدی توسعه‌دهندگان نرم‌افزار هستیم. داستان ما
+                  از یک نیاز ساده شروع شد: فاصله عمیقی که بین آموزش‌های تئوری
+                  دانشگاهی و مهارت‌های عملی مورد نیاز در شرکت‌های بزرگ تکنولوژی
+                  وجود داشت.
+                </p>
+                <p>
+                  ما تصمیم گرفتیم این خلأ را پر کنیم. نه با ویدیوهای ضبط شده‌ی
+                  خسته‌کننده، بلکه با ایجاد محیطی شبیه به دنیای واقعی کار. جایی
+                  که شما فقط کد نمی‌خوانید، بلکه با چالش‌های واقعی دست‌وپنج نرم
+                  می‌کنید، باگ‌ها را برطرف می‌کنید و یاد می‌گیرید چطور مثل یک
+                  مهندس ارشد فکر کنید.
+                </p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-muted/20">
-        <div className="container-custom text-center">
-          <h2 className="text-3xl font-bold mb-12 text-foreground">تیم رهبری ما</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="group">
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 border border-border bg-card relative">
-                   <img 
-                     src={`https://images.unsplash.com/photo-${item === 1 ? '1560250097-0b9358e8b3b9' : item === 2 ? '1573496359142-b8d87734a5a2' : item === 3 ? '1580489944761-15a19d654956' : '1535713875002-d1d0cf377fde'}?q=80&w=400&auto=format&fit=crop`} 
-                     alt="Member"
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                   />
-                </div>
-                <h3 className="font-bold text-lg text-foreground">نام عضو تیم</h3>
-                <p className="text-primary text-sm">سمت شغلی</p>
+          {/* --- Section 2: Bottom Area (Text Right, Graphic Left) --- */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            {/* Right Column: Long Content (7 Cols) */}
+            <div className="lg:col-span-7 space-y-16">
+              {/* Block 1 */}
+              <div className="space-y-4">
+                <h2 className="text-3xl font-bold text-gray-900">
+                  ماموریت: دموکراتیک کردن آموزش باکیفیت
+                </h2>
+                <p className="text-gray-500 leading-loose text-justify text-lg">
+                  ما عمیقاً باور داریم که استعداد در سراسر کشور به طور یکسان
+                  توزیع شده است، اما متأسفانه فرصت‌ها نه. ماموریت اصلی هوش‌کد
+                  این است که دسترسی به آموزش‌های سطح جهانی برنامه‌نویسی را برای
+                  هر ایرانی، فارغ از موقعیت جغرافیایی، فراهم کند. ما می‌خواهیم
+                  ابزاری بسازیم که هر کسی با داشتن یک لپ‌تاپ و اینترنت، بتواند
+                  مسیری شفاف و مطمئن به سمت درآمد بالا و جایگاه شغلی حرفه‌ای
+                  داشته باشد. کیفیت محتوای ما خط قرمز ماست و در این مسیر هیچ
+                  مصالحه‌ای نمی‌کنیم.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
+              {/* Block 2 */}
+              <div className="space-y-4">
+                <h2 className="text-3xl font-bold text-gray-900">
+                  چرا متدولوژی ما متفاوت است؟
+                </h2>
+                <p className="text-gray-500 leading-loose text-justify text-lg">
+                  در سیستم‌های سنتی، شما ماه‌ها صرف یادگیری تئوری می‌کنید بدون
+                  اینکه بدانید کجا کاربرد دارند. در هوش‌کد، ما پروسه را معکوس
+                  کرده‌ایم. شما از روز اول با مسئله روبرو می‌شوید و برای حل
+                  آن، ابزارها (کدها) را یاد می‌گیرید. پلتفرم ما مجهز به
+                  سیستم‌های تمرین تعاملی، دستیار هوشمند مبتنی بر AI و سیستم
+                  منتورینگ کد-به-کد است. این یعنی شما هرگز در مسیر یادگیری تنها
+                  نیستید و همیشه یک راهنما برای عبور از موانع فنی در کنار خود
+                  دارید.
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-6">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary/20 hover:bg-primary/90 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <span>تماس با ما  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Left Column: Abstract Graphic (5 Cols) */}
+            <div className="lg:col-span-5 hidden lg:block sticky top-32">
+              <div className="bg-gray-50 rounded-[3rem] p-10 border border-gray-100 aspect-[4/5] flex items-center justify-center relative overflow-hidden">
+                {/* SVG Graphic: Abstract Code Structure */}
+                <svg
+                  viewBox="0 0 400 500"
+                  className="w-full h-full text-gray-200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Background grid lines */}
+                  <path
+                    d="M50 50 V450"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="8 8"
+                    className="text-gray-200"
+                  />
+                  <path
+                    d="M150 50 V450"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="8 8"
+                    className="text-gray-100"
+                  />
+                  <path
+                    d="M250 50 V450"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="8 8"
+                    className="text-gray-100"
+                  />
+                  <path
+                    d="M350 50 V450"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeDasharray="8 8"
+                    className="text-gray-200"
+                  />
+
+                  {/* Abstract Blocks (Representing Code/Modules) */}
+                  {/* Block 1 (Primary) */}
+                  <rect
+                    x="80"
+                    y="100"
+                    width="180"
+                    height="60"
+                    rx="20"
+                    className="fill-primary/10 stroke-primary"
+                    strokeWidth="3"
+                  />
+                  <circle cx="110" cy="130" r="8" className="fill-primary" />
+                  <rect
+                    x="130"
+                    y="125"
+                    width="80"
+                    height="10"
+                    rx="5"
+                    className="fill-primary/40"
+                  />
+
+                  {/* Connection Line */}
+                  <path
+                    d="M170 160 V200"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="text-primary/30"
+                  />
+
+                  {/* Block 2 (Gray) */}
+                  <rect
+                    x="120"
+                    y="200"
+                    width="200"
+                    height="60"
+                    rx="20"
+                    className="fill-white stroke-gray-300"
+                    strokeWidth="3"
+                  />
+                  <circle cx="150" cy="230" r="8" className="fill-gray-300" />
+                  <rect
+                    x="170"
+                    y="225"
+                    width="100"
+                    height="10"
+                    rx="5"
+                    className="fill-gray-200"
+                  />
+
+                  {/* Connection Line */}
+                  <path
+                    d="M220 260 V300"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    className="text-gray-300"
+                  />
+
+                  {/* Block 3 (Primary Accent) */}
+                  <rect
+                    x="80"
+                    y="300"
+                    width="160"
+                    height="60"
+                    rx="20"
+                    className="fill-primary/5 stroke-primary/60"
+                    strokeWidth="3"
+                  />
+                  <circle cx="110" cy="330" r="8" className="fill-primary/60" />
+                  <rect
+                    x="130"
+                    y="325"
+                    width="60"
+                    height="10"
+                    rx="5"
+                    className="fill-primary/30"
+                  />
+
+                  {/* Floating decorative elements */}
+                  <circle
+                    cx="320"
+                    cy="130"
+                    r="40"
+                    className="stroke-gray-100"
+                    strokeWidth="2"
+                    strokeDasharray="4 4"
+                  />
+                  <circle cx="60" cy="380" r="20" className="fill-primary/10" />
+                </svg>
+
+                {/* Gradient Overlay for atmosphere */}
+                <div className="absolute inset-0 bg-linear-to-t from-white/80 via-transparent to-transparent pointer-events-none" />
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }

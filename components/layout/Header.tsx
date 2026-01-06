@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
-import { Menu, X, ChevronLeft, User, Search, LayoutGrid } from "lucide-react";
+import { Menu, X, ChevronLeft, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -30,7 +30,6 @@ const Header = () => {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { name: "مسیرهای یادگیری", href: "/paths" },
     { name: "دوره‌های آموزشی", href: "/courses" },
     { name: "دستیار هوشمند", href: "/ai-hub" },
     { name: "درباره ما", href: "/about" },
